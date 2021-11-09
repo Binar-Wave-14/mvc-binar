@@ -1,0 +1,36 @@
+{
+  "name": "mvc-binar",
+  "version": "0.0.1",
+  "description": "binar mvc pattern",
+  "main": "index.js",
+  "scripts": {
+    "db:migrate": "sequelize db:migrate",
+    "start:dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Binar-Wave-14/mvc-binar.git"
+  },
+  "keywords": [
+    "mvc"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Binar-Wave-14/mvc-binar/issues"
+  },
+  "homepage": "https://github.com/Binar-Wave-14/mvc-binar#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14",
+    "sequelize-cli": "^6.3.0"
+  }
+}
