@@ -36,6 +36,17 @@ exports.register = async (req, res, next) => {
         // hash password menggunakan bcrypt
         const passwordHash = await bcrypt.hash(password, 12);
 
+        const conditions = {
+            include: []
+        }
+
+        if (roleName) {
+            conditions.include.push({
+                model: UserRole,
+                as: 'role'
+            })
+        }
+
         // masukan email, fullName, hashedPassword. dan role ke db
         await User.create({
             email,
@@ -44,14 +55,7 @@ exports.register = async (req, res, next) => {
             role: {
                 name: roleName
             }
-        }, {
-            include: [
-                {
-                    model: UserRole,
-                    as: 'role'
-                }
-            ]
-        })
+        }, conditions)
 
         // kirim response json berupa token
         return res.status(200).json({

@@ -7,6 +7,7 @@ const path = require('path')
 
 // import user router
 const user = require('./routers/users.router')
+const dashboard = require('./routers/dashboards.router')
 
 // buat app dari express
 const app = express()
@@ -21,6 +22,9 @@ app.set('views', path.join(__dirname, 'views'))
 
 // gunakan user router sebagai middleware
 app.use(user)
+
+// gunakan dasshboard router sebagai middleware
+app.use(dashboard)
 
 // error handling
 app.use((err, req, res, next) => {

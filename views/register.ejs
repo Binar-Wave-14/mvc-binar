@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="card position-relative font-monospace m-auto w-50" style="height: 400px; top: 150px;">
+        <div class="card position-relative font-monospace m-auto w-50" style="height: 500px; top: 150px;">
             <form class="w-50 m-auto" action="/register" method="POST">
                 <div class="mb-3">
                     <label for="fullName" class="form-label">Nama</label>
@@ -23,6 +23,14 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input name="password" type="password" class="form-control" id="inputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="roleName" class="form-label">Role</label>
+                    <select class="form-select" name="roleName">
+                        <option selected>Select role name</option>
+                        <option value="SuperAdmin">Super Admin</option>
+                        <option value="PlayerUser">Player</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
