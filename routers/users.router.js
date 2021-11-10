@@ -2,8 +2,11 @@ const router = require('express').Router()
 
 const {viewRegister, register, login} = require('../controllers/users.controller')
 
+const { validate } = require('../middlewares/validation.midleware')
+const { registerSchema } = require('../schemas/register.schema')
+
 router.get('/register', viewRegister)
-router.post('/register', register)
+router.post('/register', validate(registerSchema), register)
 
 router.post('/login', login)
 
