@@ -2,8 +2,13 @@
 require('dotenv').config()
 
 // import express
+const {SESSION_SECRET} = process.env
 const express = require('express')
 const path = require('path')
+const session = require("express-session");
+const flash = require("express-flash")
+const passport = require("./utils/passport.js")
+
 
 // import user router
 const user = require('./routers/users.router')
@@ -15,6 +20,15 @@ const app = express()
 // gunakan middleware express.json dan express.urlencoded
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(flash())
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // configure template engine using ejs
 app.set('view engine', 'ejs')

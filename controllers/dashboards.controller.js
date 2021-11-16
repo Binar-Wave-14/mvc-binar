@@ -2,6 +2,7 @@ const { User, UserRole } = require('../models')
 
 exports.viewDashboard = async (req, res, next) => {
     try {
+        const { user } = req
         const users = await User.findAll({
             attributes: ['id', 'fullName', 'email'],
             include: [
@@ -14,7 +15,8 @@ exports.viewDashboard = async (req, res, next) => {
         })
 
         return res.status(200).render('dashboard', {
-            users
+            users,
+            fullName: user.fullName
         })
     } catch (error) {
         next(error)

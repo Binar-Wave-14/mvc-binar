@@ -2,6 +2,7 @@
 require('dotenv').config()
 
 const { User, UserRole } = require("../models");
+const passport = require('../utils/passport')
 const jwt = require('jsonwebtoken')
 
 const bcrypt = require("bcrypt");
@@ -9,6 +10,10 @@ const bcrypt = require("bcrypt");
 exports.viewRegister = async (req, res, next) => {
     // render tampilan UI register
     return res.render('register')
+}
+
+exports.viewLogin = async (req, res, next) => {
+    return res.render('login')
 }
 
 exports.register = async (req, res, next) => {
