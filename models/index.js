@@ -1,5 +1,7 @@
 const User = require('./users.model')
 const UserRole = require('./user-roles.model')
+const sequelize = require('./sequelize')
+const Sequelize = require('sequelize')
 
 User.hasOne(UserRole, {
     as: 'role',
@@ -17,5 +19,7 @@ UserRole.belongsTo(User, {
 
 module.exports = {
     User,
-    UserRole
+    UserRole,
+    sequelize,
+    Sequelize
 }

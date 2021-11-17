@@ -9,10 +9,10 @@ const session = require("express-session");
 const flash = require("express-flash")
 const passport = require("./utils/passport.js")
 
-
 // import user router
 const user = require('./routers/users.router')
 const dashboard = require('./routers/dashboards.router')
+const upload = require('./routers/upload.router')
 
 // buat app dari express
 const app = express()
@@ -34,11 +34,17 @@ app.use(passport.session())
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+// serving public directory
+app.use(express.static("public"))
+
 // gunakan user router sebagai middleware
 app.use(user)
 
 // gunakan dasshboard router sebagai middleware
 app.use(dashboard)
+
+// router untuk upload
+app.use(upload)
 
 // error handling
 app.use((err, req, res, next) => {

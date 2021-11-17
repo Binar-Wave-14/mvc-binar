@@ -1,9 +1,10 @@
 // buat controller untuk load UI register
 require('dotenv').config()
 
-const { User, UserRole } = require("../models");
+const { User, UserRole, sequelize } = require("../models");
 const passport = require('../utils/passport')
 const jwt = require('jsonwebtoken')
+const { QueryTypes } = require('sequelize')
 
 const bcrypt = require("bcrypt");
 
@@ -74,6 +75,26 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
+        const { authorization } = req.headers
+
+        if (authorization) {
+            const bearerToken = authorization.split(' ')[1]
+    
+            try {
+                const isValidToken = jwt.verify(bearerToken, process.env.JWT_TOKEN, {})
+                if (isValidToken && isValidToken.userId) {
+                    // token ini valid
+                    // kirim respon berhasil login
+                    return res.status(200).json({
+                        message: 'Anda berhasil login',
+                        code: 200,
+                    })    
+                }
+            } catch (error) {
+
+            }
+        }
+
         // ambil email dan password dari req.body
         const { email, password } = req.body
 
@@ -120,6 +141,24 @@ exports.login = async (req, res, next) => {
                 token
             }
         })    
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.whoiami = async (req, res, next) => {
+    try {
+        const { user } = req
+        const data = await sequelize.query('SELECT * FROM users', {type: QueryTypes.SELECT})
+        console.log(data)
+        return res.status(200).json({
+            code: 200,
+            message: 'success verify user',
+            data: {
+                fullName: user.fullName,
+                email: user.email
+            }
+        })
     } catch (error) {
         next(error)
     }
